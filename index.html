@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Muthakir - رفيقك الدراسي الذكي</title>
+    <title>Muthakir - Ø±ÙÙÙÙ Ø§ÙØ¯Ø±Ø§Ø³Ù Ø§ÙØ°ÙÙ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -184,35 +184,12 @@
     </style>
 
   <!-- 3. IMPORT MAP: Maps clean import names to the actual .tsx files -->
-  <script type="importmap">
-{
-  "imports": {
-    "react": "https://esm.sh/react@18.2.0",
-    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
-    "react-markdown": "https://esm.sh/react-markdown@9.0.1",
-    "recharts": "https://esm.sh/recharts@2.12.0",
-    "@google/genai": "https://esm.sh/@google/genai@0.1.1",
-    "./App": "./App.tsx",
-    "./types": "./types.ts",
-    "./services/geminiService": "./services/geminiService.ts",
-    "./components/Button": "./components/Button.tsx",
-    "./components/FileUpload": "./components/FileUpload.tsx",
-    "./components/ResultModal": "./components/ResultModal.tsx",
-    "./components/Summarizer": "./components/Summarizer.tsx",
-    "./components/Flashcards": "./components/Flashcards.tsx",
-    "./components/Researcher": "./components/Researcher.tsx",
-    "./components/Presentation": "./components/Presentation.tsx",
-    "./components/Quizzer": "./components/Quizzer.tsx",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "react/": "https://esm.sh/react@^19.2.3/"
-  }
-}
-</script>
-</head>
+  </head>
   <body class="bg-slate-50 text-slate-900 h-screen overflow-hidden selection:bg-indigo-100 selection:text-indigo-900">
     <div id="root"></div>
     
     <!-- 4. ENTRY POINT: Uses text/babel to trigger compilation -->
     <script type="text/babel" data-type="module" src="./index.tsx" data-presets="react,typescript"></script>
-  </body>
+    <script type="module" src="/index.tsx"></script>
+</body>
 </html>
