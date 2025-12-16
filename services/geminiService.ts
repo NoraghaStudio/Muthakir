@@ -1,7 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { SummaryLevel, Language, Flashcard, QuizQuestion, Slide, QuizDifficulty, QuizAnalysis, ResearchResult, PresentationDetailLevel } from "../types";
 
-const apiKey = process.env.API_KEY || '';
+// Safely access process.env.API_KEY to avoid crashing if process is not defined in the browser environment
+const apiKey = (typeof process !== 'undefined' && process.env?.API_KEY) || '';
 const ai = new GoogleGenAI({ apiKey });
 
 /**
