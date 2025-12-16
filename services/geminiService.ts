@@ -1,7 +1,7 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import { SummaryLevel, Language, Flashcard, QuizQuestion, Slide, QuizDifficulty, QuizAnalysis, ResearchResult, PresentationDetailLevel } from "../types";
 
-// Safely access process.env.API_KEY || 'FAKE_API_KEY_FOR_DEVELOPMENT' to avoid crashing if process is not defined in the browser environment
+// Safely access process.env.API_KEY to avoid crashing if process is not defined in the browser environment
 const apiKey = (typeof process !== 'undefined' && process.env?.API_KEY) || '';
 const ai = new GoogleGenAI({ apiKey });
 
@@ -59,8 +59,8 @@ export const generateSummary = async (
     - Write mathematical equations in plain, readable text using standard Unicode symbols.
     - Examples: 
       - Instead of "$T_F = \frac{9}{5} T_C + 32$", write: "T_F = (9/5) * T_C + 32"
-      - Instead of "^\circ C", write: "Â°C"
-      - Instead of "\Delta", write: "Delta" or "Î"
+      - Instead of "^\circ C", write: "°C"
+      - Instead of "\Delta", write: "Delta" or "Δ"
     - Make sure units and numbers are clear and easy to read.
   `;
 
@@ -75,10 +75,10 @@ export const generateSummary = async (
       }
     });
 
-    return response.text || "Ø¹Ø°Ø±Ø§ÙØ ÙÙ Ø£ØªÙÙÙ ÙÙ Ø§Ø³ØªØ®Ø±Ø§Ø¬ Ø§ÙÙØµ.";
+    return response.text || "عذراً، لم أتمكن من استخراج النص.";
   } catch (error) {
     console.error("Summary error", error);
-    throw new Error("ÙØ´ÙØª Ø¹ÙÙÙØ© Ø§ÙØªÙØ®ÙØµ. ØªØ£ÙØ¯ ÙÙ Ø£Ù Ø§ÙÙÙÙ ØµØ§ÙØ­ ÙØ­Ø§ÙÙ ÙØ±Ø© Ø£Ø®Ø±Ù.");
+    throw new Error("فشلت عملية التلخيص. تأكد من أن الملف صالح وحاول مرة أخرى.");
   }
 };
 
@@ -119,7 +119,7 @@ export const generateFlashcards = async (
     return [];
   } catch (error) {
     console.error("Flashcard error", error);
-    throw new Error("ÙØ´Ù Ø¥ÙØ´Ø§Ø¡ Ø§ÙØ¨Ø·Ø§ÙØ§Øª Ø§ÙØªØ¹ÙÙÙÙØ©.");
+    throw new Error("فشل إنشاء البطاقات التعليمية.");
   }
 };
 
@@ -173,7 +173,7 @@ export const generateQuiz = async (
     return [];
   } catch (error) {
     console.error("Quiz error", error);
-    throw new Error("ÙØ´Ù Ø¥ÙØ´Ø§Ø¡ Ø§ÙØ§Ø®ØªØ¨Ø§Ø±.");
+    throw new Error("فشل إنشاء الاختبار.");
   }
 };
 
@@ -186,7 +186,7 @@ export const analyzeQuizWeaknesses = async (
   if (wrongIndices.length === 0) {
     return {
       weakPoints: [],
-      recommendations: "Ø£Ø­Ø³ÙØª! Ø£Ø¯Ø§Ø¤Ù ÙÙØªØ§Ø² ÙÙØ§ ØªÙØ¬Ø¯ ÙÙØ§Ø· Ø¶Ø¹Ù ÙØ§Ø¶Ø­Ø©."
+      recommendations: "أحسنت! أداؤك ممتاز ولا توجد نقاط ضعف واضحة."
     };
   }
 
@@ -227,7 +227,7 @@ export const analyzeQuizWeaknesses = async (
     throw new Error("Empty response");
   } catch (error) {
     console.error("Analysis error", error);
-    return { weakPoints: ["ØªØ¹Ø°Ø± Ø§ÙØªØ­ÙÙÙ"], recommendations: "Ø±Ø§Ø¬Ø¹ Ø§ÙØ£Ø³Ø¦ÙØ© Ø§ÙØªÙ Ø£Ø®Ø·Ø£Øª ÙÙÙØ§." };
+    return { weakPoints: ["تعذر التحليل"], recommendations: "راجع الأسئلة التي أخطأت فيها." };
   }
 };
 
@@ -263,12 +263,12 @@ export const conductResearch = async (topic: string, wordCount: number): Promise
     }
 
     return {
-      content: response.text || "ØªØ¹Ø°Ø± Ø¥ÙØ´Ø§Ø¡ Ø§ÙØ¨Ø­Ø«.",
+      content: response.text || "تعذر إنشاء البحث.",
       sources
     };
   } catch (error) {
     console.error("Research error", error);
-    throw new Error("Ø­Ø¯Ø« Ø®Ø·Ø£ Ø£Ø«ÙØ§Ø¡ Ø§ÙØ¨Ø­Ø«. Ø­Ø§ÙÙ ÙÙØ¶ÙØ¹Ø§Ù Ø¢Ø®Ø±.");
+    throw new Error("حدث خطأ أثناء البحث. حاول موضوعاً آخر.");
   }
 };
 
@@ -390,6 +390,6 @@ export const generatePresentation = async (
     return slides;
   } catch (error) {
     console.error("Presentation error", error);
-    throw new Error("ÙØ´Ù Ø¥ÙØ´Ø§Ø¡ Ø§ÙØ¹Ø±Ø¶ Ø§ÙØªÙØ¯ÙÙÙ.");
+    throw new Error("فشل إنشاء العرض التقديمي.");
   }
 };
